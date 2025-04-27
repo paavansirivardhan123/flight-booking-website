@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packages - Voyager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<style>
+    :root {
+        --primary: #0062cc;
+        --primary-dark: #004fa3;
+        --secondary: #FFD700;
+        --light: #ffffff;
+        --dark: #222831;
+        --gray: #f8f9fa;
+        --gray-dark: #343a40;
+        --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s ease;
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+        background-color: var(--light);
+        color: var(--dark);
+        line-height: 1.6;
+    }
+    
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+    
+    /* Header Styles */
+    header {
+        background-color: var(--light);
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+    }
+    
+    .logo {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: var(--primary);
+        font-size: 24px;
+        font-weight: 700;
+    }
+    
+    .logo i {
+        font-size: 26px;
+        margin-right: 8px;
+        color: var(--secondary);
+    }
+    
+    .nav-links {
+        display: flex;
+        list-style: none;
+    }
+    
+    .nav-links li {
+        margin: 0 15px;
+    }
+    
+    .nav-links a {
+        text-decoration: none;
+        color: var(--dark);
+        font-weight: 500;
+        padding: 8px 0;
+        position: relative;
+        transition: var(--transition);
+    }
+    
+    .nav-links a:hover {
+        color: var(--primary);
+    }
+    
+    .nav-links a.active {
+        color: var(--primary);
+        font-weight: 600;
+    }
+    
+    .nav-links a.active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: var(--secondary);
+        border-radius: 5px;
+    }
+    
+    .login-btn {
+        display: flex;
+        align-items: center;
+        background-color: var(--primary);
+        color: var(--light);
+        border: none;
+        padding: 8px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+    
+    .login-btn i {
+        margin-right: 8px;
+    }
+    
+    .login-btn:hover {
+        background-color: var(--primary-dark);
+    }
+    
+    /* Hero Section */
+    .hero {
+        background-size: cover;
+        background-position: center;
+        color: var(--light);
+        padding: 100px 0;
+        text-align: center;
+        border-radius: 0 0 15px 15px;
+        margin-bottom: 10px;
+    }
+    
+    .hero h1 {
+        font-size: 42px;
+        /* margin-bottom: 50px; */
+    }
+    
+    .hero p {
+        font-size: 18px;
+        max-width: 600px;
+        margin: 10px auto 50px;
+    }
+    
+    /* Filters Section */
+    .filters {
+        background-color: var(--light);
+        box-shadow: var(--shadow);
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+    }
+    
+    .filters-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .filter-group {
+        flex: 1;
+        min-width: 200px;
+    }
+    
+    .filter-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: var(--dark);
+    }
+    
+    .filter-group select, .filter-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid var(--gray);
+        border-radius: 5px;
+        background-color: var(--light);
+    }
+    
+    .search-btn {
+        background-color: var(--secondary);
+        color: var(--dark);
+        font-weight: 600;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: var(--transition);
+        align-self: flex-end;
+    }
+    
+    .search-btn:hover {
+        background-color: #ffe066;
+    }
+    
+    /* Section Styles */
+    .section {
+        padding: 40px 0;
+    }
+    
+    .section h2 {
+        text-align: center;
+        margin-bottom: 40px;
+        color: var(--primary);
+        font-size: 32px;
+        position: relative;
+    }
+    
+    .section h2::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 3px;
+        background-color: var(--secondary);
+    }
+    
+    /* Package Cards */
+    .packages-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+    }
+    
+    .package-card {
+        background-color: var(--light);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+    }
+    
+    .package-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .package-img {
+        height: 200px;
+        overflow: hidden;
+    }
+    
+    .package-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+    }
+    
+    .package-card:hover .package-img img {
+        transform: scale(1.1);
+    }
+    
+    .package-content {
+        padding: 20px;
+    }
+    
+    .package-tag {
+        display: inline-block;
+        background-color: #e6f0ff;
+        color: var(--primary);
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    
+    .package-card h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: var(--dark);
+    }
+    
+    .package-details {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+    
+    .package-detail {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        color: var(--dark);
+    }
+    
+    .package-detail i {
+        margin-right: 5px;
+        color: var(--primary);
+    }
+    
+    .package-rating {
+        color: var(--secondary);
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    
+    .package-rating i {
+        margin-right: 2px;
+    }
+    
+    .package-price {
+        margin-bottom: 15px;
+    }
+    
+    .price-value {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--primary);
+    }
+    
+    .price-per-person {
+        font-size: 14px;
+        color: var(--dark);
+    }
+    
+    .book-btn {
+        display: block;
+        background-color: var(--primary);
+        color: var(--light);
+        text-align: center;
+        padding: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: var(--transition);
+    }
+    
+    .book-btn:hover {
+        background-color: var(--primary-dark);
+    }
+    
+    /* Newsletter */
+    .newsletter {
+        background-color: var(--primary);
+        color: var(--light);
+        padding: 60px 0;
+        text-align: center;
+        margin-top: 50px;
+    }
+    
+    .newsletter h3 {
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+    
+    .newsletter p {
+        max-width: 600px;
+        margin: 0 auto 30px;
+    }
+    
+    .newsletter-form {
+        display: flex;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .newsletter-form input {
+        flex: 1;
+        padding: 12px 15px;
+        border: none;
+        border-radius: 25px 0 0 25px;
+    }
+    
+    .newsletter-form button {
+        background-color: var(--secondary);
+        color: var(--dark);
+        border: none;
+        padding: 0 25px;
+        border-radius: 0 25px 25px 0;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+    
+    .newsletter-form button:hover {
+        background-color: #ffe066;
+    }
+    
+    /* Footer */
+    footer {
+        background-color: var(--gray-dark);
+        color: var(--light);
+        padding: 4rem 0 2rem;
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .footer-col h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-bottom: 0.5rem;
+    }
+
+    .footer-col h3::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 50px;
+        height: 2px;
+        background-color: var(--primary);
+    }
+
+    .footer-links {
+        list-style: none;
+    }
+
+    .footer-links li {
+        margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+        color: #adb5bd;
+        text-decoration: none;
+        transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+        color: var(--primary);
+        text-decoration: underline;
+    }
+
+    .footer-social {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .social-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        color: var(--light);
+        text-decoration: none;
+        transition: var(--transition);
+    }
+
+    .social-icon:hover {
+        background-color: var(--primary);
+        transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 2rem;
+        text-align: center;
+        color: #adb5bd;
+        font-size: 0.9rem;
+    }
+    
+    @media screen and (max-width: 768px) {
+        .filters-container {
+            flex-direction: column;
+        }
+    
+        .search-btn {
+            width: 100%;
+        }
+    
+        .newsletter-form {
+            flex-direction: column;
+        }
+    
+        .newsletter-form input {
+            border-radius: 25px;
+            margin-bottom: 10px;
+        }
+    
+        .newsletter-form button {
+            border-radius: 25px;
+            padding: 12px 25px;
+        }
+    }
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <a href="Discover_Your_Next_Adventure.html" class="logo">
+                    <i class="fas fa-plane-departure"></i>
+                    <span class="logo-text">Voyager</span>
+                </a>
+                <div class="hamburger">
+                </div>
+                
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero" style ="background-image: url('main3.jpg'); background-repeat: no-repeat; background-size: cover; color: rgb(255, 255, 255);">
+        <div class="container">
+            <h1>Extraordinary Vacation Packages</h1>
+            <p>Discover our handpicked vacation packages with the best deals on flights, hotels, and experiences</p>
+        </div>
+    </div>
+
+    <!-- Filters Section -->
+    <!-- <div class="container">
+        <div class="filters">
+            <div class="filters-container">
+                <div class="filter-group">
+                    <label for="destination">Destination</label>
+                    <select id="destination">
+                        <option value="">Any Destination</option>
+                        <option value="bali">Bali</option>
+                        <option value="paris">Paris</option>
+                        <option value="maldives">Maldives</option>
+                        <option value="thailand">Thailand</option>
+                        <option value="dubai">Dubai</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="duration">Duration</label>
+                    <select id="duration">
+                        <option value="">Any Duration</option>
+                        <option value="3-5">3-5 Days</option>
+                        <option value="6-8">6-8 Days</option>
+                        <option value="9-12">9-12 Days</option>
+                        <option value="13+">13+ Days</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="budget">Budget</label>
+                    <select id="budget">
+                        <option value="">Any Budget</option>
+                        <option value="economy">Economy</option>
+                        <option value="standard">Standard</option>
+                        <option value="premium">Premium</option>
+                        <option value="luxury">Luxury</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="travel-date">Travel Date</label>
+                    <input type="date" id="travel-date">
+                </div>
+                <button class="search-btn">Search Packages</button>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- Packages Section -->
+    <section class="section">
+        <div class="container">
+            <h2>Available Packages</h2>
+            <div class="packages-grid">
+                <!-- Package Card 1 -->
+                <div class="package-card">
+                    <div class="package-img">
+                        <img src="balibeach.jpg" alt="Bali Beach Resort">
+                    </div>
+                    <div class="package-content">
+                        <span class="package-tag">Bestseller</span>
+                        <h3>Bali Beach Getaway</h3>
+                        <div class="package-details">
+                            <div class="package-detail">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>5 Days, 4 Nights</span>
+                            </div>
+                            <div class="package-detail">
+                                <i class="fas fa-user-friends"></i>
+                                <span>2 Adults</span>
+                            </div>
+                        </div>
+                        <div class="package-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>4.5 (324 reviews)</span>
+                        </div>
+                        <div class="package-price">
+                            <span class="price-value">$799</span>
+                            <span class="price-per-person"> / per person</span>
+                        </div>
+                        <a href="book_now.html" class="book-btn">Book Now</a>
+                    </div>
+                </div>
+
+                <!-- Package Card 2 -->
+                <div class="package-card">
+                    <div class="package-img">
+                        <img src="pariscity.jpg" alt="Paris City Tour">
+                    </div>
+                    <div class="package-content">
+                        <span class="package-tag">Popular</span>
+                        <h3>Paris City Explorer</h3>
+                        <div class="package-details">
+                            <div class="package-detail">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>7 Days, 6 Nights</span>
+                            </div>
+                            <div class="package-detail">
+                                <i class="fas fa-user-friends"></i>
+                                <span>2 Adults</span>
+                            </div>
+                        </div>
+                        <div class="package-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.8 (512 reviews)</span>
+                        </div>
+                        <div class="package-price">
+                            <span class="price-value">$1,299</span>
+                            <span class="price-per-person"> / per person</span>
+                        </div>
+                        <a href="book_now.html" class="book-btn">Book Now</a>
+                    </div>
+                </div>
+
+                <!-- Package Card 3 -->
+                <div class="package-card">
+                    <div class="package-img">
+                        <img src="maldives1.jpg" alt="Maldives Luxury Resort">
+                    </div>
+                    <div class="package-content">
+                        <span class="package-tag">Luxury</span>
+                        <h3>Maldives Paradise</h3>
+                        <div class="package-details">
+                            <div class="package-detail">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>8 Days, 7 Nights</span>
+                            </div>
+                            <div class="package-detail">
+                                <i class="fas fa-user-friends"></i>
+                                <span>2 Adults</span>
+                            </div>
+                        </div>
+                        <div class="package-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.9 (216 reviews)</span>
+                        </div>
+                        <div class="package-price">
+                            <span class="price-value">$2,499</span>
+                            <span class="price-per-person"> / per person</span>
+                        </div>
+                        <a href="book_now.html" class="book-btn">Book Now</a>
+                    </div>
+                </div>
+
+                <!-- Package Card 4 -->
+                <div class="package-card">
+                    <div class="package-img">
+                        <img src="egypt.jpg" alt="Egypt Pyramids Tour">
+                    </div>
+                    <div class="package-content">
+                        <span class="package-tag">Historical</span>
+                        <h3>Egypt Ancient Wonders</h3>
+                        <div class="package-details">
+                            <div class="package-detail">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>10 Days, 9 Nights</span>
+                            </div>
+                            <div class="package-detail">
+                                <i class="fas fa-user-friends"></i>
+                                <span>2 Adults</span>
+                            </div>
+                        </div>
+                        <div class="package-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>4.0 (183 reviews)</span>
+                        </div>
+                        <div class="package-price">
+                            <span class="price-value">$1,899</span>
+                            <span class="price-per-person"> / per person</span>
+                        </div>
+                        <a href="book_now.html" class="book-btn">Book Now</a>
+                    </div>
+                </div>
+
+                <!-- Package Card 5 -->
+                <div class="package-card">
+                    <div class="package-img">
+                        <img src="japancherry.jpg" alt="Japan Cherry Blossom Tour">
+                    </div>
+                    <div class="package-content">
+                        <span class="package-tag">Seasonal</span>
+                        <h3>Japan Cherry Blossom</h3>
+                        <div class="package-details">
+                            <div class="package-detail">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>9 Days, 8 Nights</span>
+                            </div>
+                            <div class="package-detail">
+                                <i class="fas fa-user-friends"></i>
+                                <span>2 Adults</span>
+                            </div>
+                        </div>
+                        <div class="package-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>4.6 (378 reviews)</span>
+                        </div>
+                        <div class="package-price">
+                            <span class="price-value">$2,199</span>
+                            <span class="price-per-person"> / per person</span>
+                        </div>
+                        <a href="book_now.html" class="book-btn">Book Now</a>
+                    </div>
+                </div>
+
+                <!-- Package Card 6 -->
+                <div class="package-card">
+                    <div class="package-img">
+                        <img src="thailand.jpg" alt="Thailand Adventure">
+                    </div>
+                    <div class="package-content">
+                        <span class="package-tag">Adventure</span>
+                        <h3>Thailand Explorer</h3>
+                        <div class="package-details">
+                            <div class="package-detail">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>6 Days, 5 Nights</span>
+                            </div>
+                            <div class="package-detail">
+                                <i class="fas fa-user-friends"></i>
+                                <span>2 Adults</span>
+                            </div>
+                        </div>
+                        <div class="package-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>4.1 (245 reviews)</span>
+                        </div>
+                        <div class="package-price">
+                            <span class="price-value">$949</span>
+                            <span class="price-per-person"> / per person</span>
+                        </div>
+                        <a href="book_now.html" class="book-btn">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Voyager</h3>
+                    <p>Discover the world with us. We provide the best travel experiences at affordable prices.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Flight Booking</a></li>
+                        <li><a href="#">Hotel Booking</a></li>
+                        <li><a href="#">Vacation Packages</a></li>
+                        <li><a href="#">Cruise Deals</a></li>
+                        <li><a href="#">Car Rentals</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Travel Street, City</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@voyager.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Voyager. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #ff5e5e;"></i> by VoyagerTeam</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Firebase SDK -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script>
+    <script type="module" src="./js/firebase-config.js"></script>
+    <script type="module" src="./js/firebase-service.js"></script>
+    <script type="module">
+        // Load search parameters from Discover page
+        window.addEventListener('DOMContentLoaded', async function() {
+            const searchParamsStr = localStorage.getItem('searchParams');
+            if (searchParamsStr) {
+                const searchParams = JSON.parse(searchParamsStr);
+                
+                try {
+                    // Filter packages based on destination
+                    const packages = await packageService.searchPackages(searchParams.destination, searchParams.dates);
+                    
+                    // Clear the stored params
+                    localStorage.removeItem('searchParams');
+                    
+                    // Update the packages display
+                    updatePackagesDisplay(packages);
+                } catch (error) {
+                    console.error('Error loading filtered packages:', error);
+                }
+            } else {
+                try {
+                    // Load all packages if no search params
+                    const packages = await packageService.getAllPackages();
+                    updatePackagesDisplay(packages);
+                } catch (error) {
+                    console.error('Error loading all packages:', error);
+                }
+            }
+        });
+    </script>
+    <script type="module">
+        import { packageService } from './js/firebase-service.js';
+
+        // Load packages from Firebase
+        async function loadPackages() {
+            try {
+                const packages = await packageService.getAllPackages();
+                const packagesGrid = document.querySelector('.packages-grid');
+                
+                if (packages.length === 0) {
+                    packagesGrid.innerHTML = '<p class="no-packages">No packages available at the moment.</p>';
+                    return;
+                }
+                
+                packagesGrid.innerHTML = packages.map(pkg => `
+                    <div class="package-card">
+                        <div class="package-img">
+                            <img src="${pkg.imageUrl || '/api/placeholder/400/300'}" alt="${pkg.name}">
+                            ${pkg.discount ? `<div class="discount-badge">Save ${pkg.discount}%</div>` : ''}
+                        </div>
+                        <div class="package-content">
+                            <h3>${pkg.name}</h3>
+                            <p class="duration"><i class="far fa-clock"></i> ${pkg.duration}</p>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> ${pkg.location}</p>
+                            <ul class="features">
+                                ${pkg.features.map(feature => `<li><i class="fas fa-check"></i> ${feature}</li>`).join('')}
+                            </ul>
+                            <div class="package-footer">
+                                <div class="price">
+                                    ${pkg.originalPrice ? `<span class="original-price">$${pkg.originalPrice}</span>` : ''}
+                                    <span class="current-price">$${pkg.price}</span>
+                                </div>
+                                <a href="book_now.html?type=package&id=${pkg.id}" class="book-btn">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading packages:', error);
+                const packagesGrid = document.querySelector('.packages-grid');
+                packagesGrid.innerHTML = '<p class="error-message">Error loading packages. Please try again later.</p>';
+            }
+        }
+
+        // Load packages when the page loads
+        loadPackages();
+    </script>
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const body = document.body;
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            // Update icon
+            if (body.classList.contains('dark-mode')) {
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Filter functionality
+        const searchBtn = document.querySelector('.search-btn');
+        searchBtn.addEventListener('click', () => {
+            // Get filter values
+            const destination = document.getElementById('destination').value;
+            const duration = document.getElementById('duration').value;
+            const budget = document.getElementById('budget').value;
+            const travelDate = document.getElementById('travel-date').value;
+            
+            // Here you would normally implement filtering logic
+            // For demo purposes, just log the filter values
+            console.log({
+                destination,
+                duration,
+                budget,
+                travelDate
+            });
+            
+            // You could add animation or loading state here
+            searchBtn.textContent = 'Searching...';
+            setTimeout(() => {
+                searchBtn.textContent = 'Search Packages';
+                alert('Search functionality would filter packages based on your criteria.');
+            }, 1000);
+        });
+        
+        // Newsletter form submission
+        const newsletterForm = document.querySelector('.newsletter-form');
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = newsletterForm.querySelector('input').value;
+            
+            // Here you would normally handle form submission
+            // For demo purposes, just show a confirmation
+            alert(`Thank you! Your email ${email} has been subscribed to our newsletter.`);
+            newsletterForm.reset();
+        });
+        let btn=document.querySelectorAll(".book-btn");
+
+        btn.forEach(btns => {
+        btns.setAttribute("href", "book_now.html");
+        });
+
+        document.querySelector("#sub").addEventListener("click",()=>{
+            alert("THANK YOU FOR")
+        });
+    </script>
+</body>
+</html>

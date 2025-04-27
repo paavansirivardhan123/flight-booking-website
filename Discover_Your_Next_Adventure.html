@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voyager - Discover Your Next Adventure</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #0062cc;
+            --primary-dark: #004fa3;
+            --secondary: #FFD700;
+            --light: #ffffff;
+            --dark: #222831;
+            --gray: #f8f9fa;
+            --gray-dark: #343a40;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--light);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-right: 0.5rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .login-btn {
+            display: flex;
+            align-items: center;
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+
+        .login-btn:hover {
+            background-color: var(--primary);
+            color: var(--light);
+        }
+
+        .login-btn i {
+            margin-right: 0.5rem;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background-image: url('main2.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            text-align: center;
+            margin-top: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 1rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
+        }
+
+        /* Search Box */
+        .search-container {
+            background-color: var(--light);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease 0.4s;
+            animation-fill-mode: both;
+        }
+
+        /* Destinations Section */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 2rem;
+        }
+
+        .destination-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .destination-img {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .destination-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .destination-card:hover .destination-img img {
+            transform: scale(1.1);
+        }
+
+        .destination-price {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 700;
+        }
+
+        .destination-content {
+            padding: 1.5rem;
+        }
+
+        .destination-name {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .destination-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .destination-rating i {
+            color: var(--secondary);
+            margin-right: 0.2rem;
+        }
+
+        .destination-rating span {
+            margin-left: 0.5rem;
+            color: #666;
+        }
+
+        .destination-btn {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+            display: block;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .destination-btn:hover {
+            background-color: var(--primary);
+            color: var(--light);
+        }
+
+        /* Deals Section */
+        .deals-section {
+            background-color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .deals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .deal-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .deal-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .deal-img {
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .deal-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .deal-card:hover .deal-img img {
+            transform: scale(1.1);
+        }
+
+        .deal-discount {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: #ff3d00;
+            color: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            z-index: 1;
+        }
+
+        .deal-name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: var(--light);
+            padding: 1.5rem 1rem 1rem;
+        }
+
+        .deal-name h3 {
+            font-size: 1.2rem;
+        }
+
+        .deal-content {
+            padding: 1.5rem;
+        }
+
+        .deal-price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .price-wrapper {
+            display: flex;
+            align-items: baseline;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #888;
+            margin-right: 0.5rem;
+        }
+
+        .discount-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .time-left {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 0.25rem 0.5rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .deal-btn {
+            background-color: var(--primary);
+            color: var(--light);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+            display: block;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .deal-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 98, 204, 0.3);
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 5rem 0;
+        }
+
+        .map-container {
+            background-color: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .map-placeholder {
+            height: 400px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #6c757d;
+            background-size: cover;
+            background-position: center;
+            transition: background-image 0.5s ease;
+        }   
+
+        .map-filters {
+            padding: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            background-color: #e9ecef;
+            color: #495057;
+            border: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: var(--light);
+        }
+
+        .map-info {
+            padding: 0 1rem 1rem;
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            background-color: var(--light);
+            padding: 5rem 0;
+            transition: var(--transition);
+        }
+
+        .reviews-carousel {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .reviews-slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .review-card {
+            flex: 0 0 100%;
+            padding: 2rem;
+            background-color: var(--light);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .review-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            border: 4px solid var(--primary);
+        }
+
+        .review-content {
+            margin-bottom: 1.5rem;
+        }
+
+        .review-content p {
+            font-style: italic;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .review-rating {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .review-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .review-location {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .carousel-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .carousel-btn {
+            background-color: var(--light);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            margin: 0 0.5rem;
+        }
+
+        .carousel-btn:hover {
+            background-color: var(--primary);
+            color: var(--light);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--gray-dark);
+            color: var(--light);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 991px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 3rem 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                height: 90vh;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-plane-departure"></i>
+                    <span class="logo-text">Voyager</span>
+                </a>
+
+                <div class="nav-icons">
+                    <button class="login-btn">
+                        <i class="fas fa-user"></i>
+                        <span>Login</span>
+                    </button>
+                    <button class="hamburger" id="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Discover Your Next Adventure</h1>
+            <p>Find amazing destinations, book flights, and create unforgettable memories</p>
+            
+            <!-- Search Form -->
+            <!-- In your hero section, modify the form like this: -->
+                <form id="searchForm" method="POST" action="index.php" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div class="form-group">
+                        <label for="departure" style="color:rgb(0, 0, 0)">From:</label>
+                        <input style="height: 30px; border-radius: 5px;" type="text" id="departure" name="departure" class="form-control" placeholder="City or Airport" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="destination" style="color:rgb(0, 0, 0)">To:</label>
+                        <input style="height: 30px; border-radius: 5px;" type="text" id="destination" name="destination" class="form-control" placeholder="City or Airport" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dates" style="color:rgb(0, 0, 0)">Dates:</label>
+                        <input style="height: 30px; border-radius: 5px;" type="date" id="dates" name="dates" class="form-control" required>
+                    </div>
+                    <div class="form-group" style="display: flex; align-items: flex-end;">
+                        <button type="submit" class="search-btn" style="width: 100%; padding: 0.75rem; background: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer;">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Destinations Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Popular Destinations</h2>
+                <p>Explore our most popular destinations around the world</p>
+            </div>
+            <div class="destinations-grid">
+                <!-- Destination 1 -->
+                <div class="destination-card">
+                    <div class="destination-img">
+                        <img src="paris.jpg" alt="Paris">
+                        <div class="destination-price">From $499</div>
+                    </div>
+                    <div class="destination-content">
+                        <h3 class="destination-name">Paris, France</h3>
+                        <div class="destination-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>4.5 (2.5k reviews)</span>
+                        </div>
+                        <a href="package.html" class="destination-btn">Explore Now</a>
+                    </div>
+                </div>
+                
+                <!-- Destination 2 -->
+                <div class="destination-card">
+                    <div class="destination-img">
+                        <img src="bali.jpg" alt="Bali">
+                        <div class="destination-price">From $699</div>
+                    </div>
+                    <div class="destination-content">
+                        <h3 class="destination-name">Bali, Indonesia</h3>
+                        <div class="destination-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.9 (3.1k reviews)</span>
+                        </div>
+                        <a href="package.html" class="destination-btn">Explore Now</a>
+                    </div>
+                </div>
+                
+                <!-- Destination 3 -->
+                <div class="destination-card">
+                    <div class="destination-img">
+                        <img src="Tokyo1.jpg" alt="Tokyo">
+                        <div class="destination-price">From $899</div>
+                    </div>
+                    <div class="destination-content">
+                        <h3 class="destination-name">Tokyo, Japan</h3>
+                        <div class="destination-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.8 (2.8k reviews)</span>
+                        </div>
+                        <a href="package.html" class="destination-btn">Explore Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Deals Section -->
+    <section class="section deals-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Special Deals</h2>
+                <p>Limited time offers on vacations packages and flights</p>
+            </div>
+            <div class="deals-grid">
+                <!-- Deal 1 -->
+                <div class="deal-card">
+                    <div class="deal-img">
+                        <img src="Maldives.jpg" alt="Maldives Deal">
+                        <div class="deal-discount">-30%</div>
+                        <div class="deal-name">
+                            <h3>Maldives Beach Resort</h3>
+                        </div>
+                    </div>
+                    <div class="deal-content">
+                        <div class="deal-price">
+                            <div class="price-wrapper">
+                                <span class="original-price">$1,299</span>
+                                <span class="discount-price">$899</span>
+                            </div>
+                            <div class="time-left">2 days left</div>
+                        </div>
+                        <a href="book_now.html" class="deal-btn">Book Now</a>
+                    </div>
+                </div>
+                
+                <!-- Deal 2 -->
+                <div class="deal-card">
+                    <div class="deal-img">
+                        <img src="NewYork.jpg" alt="New York Deal">
+                        <div class="deal-discount">-25%</div>
+                        <div class="deal-name">
+                            <h3>New York City Break</h3>
+                        </div>
+                    </div>
+                    <div class="deal-content">
+                        <div class="deal-price">
+                            <div class="price-wrapper">
+                                <span class="original-price">$799</span>
+                                <span class="discount-price">$599</span>
+                            </div>
+                            <div class="time-left">5 days left</div>
+                        </div>
+                        <a href="book_now.html" class="deal-btn">Book Now</a>
+                    </div>
+                </div>
+                
+                <!-- Deal 3 -->
+                <div class="deal-card">
+                    <div class="deal-img">
+                        <img src="Rome.png" alt="Rome Deal">
+                        <div class="deal-discount">-20%</div>
+                        <div class="deal-name">
+                            <h3>Rome Historical Tour</h3>
+                        </div>
+                    </div>
+                    <div class="deal-content">
+                        <div class="deal-price">
+                            <div class="price-wrapper">
+                                <span class="original-price">$699</span>
+                                <span class="discount-price">$559</span>
+                            </div>
+                            <div class="time-left">3 days left</div>
+                        </div>
+                        <a href="book_now.html" class="deal-btn">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="section map-section">
+        <div class="container" >
+            <div class="section-title" >
+                <h2>Explore Destinations</h2>
+                <p>Use our interactive images to find your next adventure</p>
+            </div>
+            <div class="map-container">
+                <div class="map-placeholder" style="background-image: url('beach1.jpg'); background-repeat: no-repeat; background-size: cover;">
+                </div>
+                <div class="map-filters">
+                    <button class="filter-btn" id="beach" value="beach">Beaches</button>
+                    <button class="filter-btn" id="moun" value="hill">Mountains</button>
+                    <button class="filter-btn" id="city" value="city">Cities</button>
+                    <button class="filter-btn" id="his" value="his">Historical</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="section reviews-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Happy Travelers</h2>
+                <p>Read what our customers are saying about their experiences</p>
+            </div>
+            <div class="reviews-carousel">
+                <div class="reviews-slider">
+                    <!-- Review 1 -->
+                    <div class="review-card">
+                        <img src="person1.jpg" alt="Traveler 1" class="review-img">
+                        <div class="review-content">
+                            <p>"Our trip to Switzerland was like a dream! From snow-covered peaks to cozy chalets, everything was flawlessly organized by Voyager. Highly recommend!"</p>
+                        </div>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-name">Aarav</div>
+                        <div class="review-location">Bali, Indonesia</div>
+                    </div>
+                    <div class="review-card">
+                        <img src="person2.jpg" alt="Traveler 2" class="review-img">
+                        <div class="review-content">
+                            <p>"Voyager crafted a perfect solo getaway to Japan for me. The cherry blossoms, the culture, the food—everything was magical. Will book again!"</p>
+                         </div>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-name">Ananya</div>
+                        <div class="review-location">Bali, Indonesia</div>
+                    </div>
+                    <div class="review-card">
+                        <img src="person3.jpg" alt="Traveler 3" class="review-img">
+                        <div class="review-content">
+                            <p>"I took my friends on a girls’ trip to Greece, and Voyager took care of every detail! Santorini sunsets were unforgettable. Thank you for the amazing memories!"</p>
+                        </div>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="review-name">Meera</div>
+                        <div class="review-location">Bali, Indonesia</div>
+                    </div>
+                </div>
+                <div class="carousel-buttons">
+                    <button class="carousel-btn prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-btn next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Voyager</h3>
+                    <p>Discover the world with us. We provide the best travel experiences at affordable prices.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Flight Booking</a></li>
+                        <li><a href="#">Hotel Booking</a></li>
+                        <li><a href="#">Vacation Packages</a></li>
+                        <li><a href="#">Cruise Deals</a></li>
+                        <li><a href="#">Car Rentals</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Travel Street, City</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@voyager.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Voyager. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #ff5e5e;"></i> by VoyagerTeam</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    document.querySelectorAll("button").forEach(button => {
+        button.addEventListener("click", (event) => {
+
+            if (event.target.value === "beach") {
+                document.getElementsByClassName("map-placeholder")[0].style.cssText =
+                    "background-image: url('beach1.jpg'); background-repeat: no-repeat; background-size: cover;";
+            }
+            else if (event.target.value === "hill") {
+                document.getElementsByClassName("map-placeholder")[0].style.cssText =
+                    "background-image: url('mountains.jpg'); background-repeat: no-repeat; background-size: cover;";
+            }
+            else if (event.target.value === "city") {
+                document.getElementsByClassName("map-placeholder")[0].style.cssText =
+                    "background-image: url('city.jpg'); background-repeat: no-repeat; background-size: cover;";
+            }
+            else if (event.target.value === "his") {
+                document.getElementsByClassName("map-placeholder")[0].style.cssText =
+                    "background-image: url('TajMahal.jpg'); background-repeat: no-repeat; background-size: cover;";
+            }
+        });
+    });
+
+
+
+        // Simple carousel functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.review-card');
+        const sliderContainer = document.querySelector('.reviews-slider');
+        const totalSlides = slides.length;
+        const prevBtn = document.querySelector('.carousel-btn.prev');
+        const nextBtn = document.querySelector('.carousel-btn.next');
+
+        function updateSlider() {
+            sliderContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        prevBtn.addEventListener('click', function() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        });
+
+        nextBtn.addEventListener('click', function() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        });
+
+        // Automatic carousel
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }, 5000);
+        
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent default form submission
+    
+    const dep = document.getElementById('departure').value;
+    const des = document.getElementById('destination').value;
+    const date = document.getElementById('dates').value;
+    
+    // Redirect with parameters
+    window.location.href = `Flight.html?departure=${encodeURIComponent(dep)}&destination=${encodeURIComponent(des)}&date=${encodeURIComponent(date)}`;
+});
+
+    </script>
+</body>
+</html>
