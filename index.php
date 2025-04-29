@@ -53,7 +53,7 @@
     }
   </style>
 </head>
-<body style="background-image: url('beach1.jpg'); background-repeat: no-repeat; background-size: cover;">
+<body style="background-image: url('images/beach1.jpg'); background-repeat: no-repeat; background-size: cover;">
   <div class="container">
     <h2>Booking Confirmed!</h2>
     <p><strong>Name:</strong> <?= $name ?></p>

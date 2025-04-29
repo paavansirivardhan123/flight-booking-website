@@ -8,4 +8,5 @@
     }
     catch (mysqli_sql_exception) {
         echo "<h1>not connected</h1>";}
+
 ?>

@@ -513,7 +513,7 @@
     </header>
 
     <!-- Hero Section -->
-    <div class="hero" style ="background-image: url('main3.jpg'); background-repeat: no-repeat; background-size: cover; color: rgb(255, 255, 255);">
+    <div class="hero" style ="background-image: url('images/main3.jpg'); background-repeat: no-repeat; background-size: cover; color: rgb(255, 255, 255);">
         <div class="container">
             <h1>Extraordinary Vacation Packages</h1>
             <p>Discover our handpicked vacation packages with the best deals on flights, hotels, and experiences</p>
@@ -572,7 +572,7 @@
                 <!-- Package Card 1 -->
                 <div class="package-card">
                     <div class="package-img">
-                        <img src="balibeach.jpg" alt="Bali Beach Resort">
+                        <img src="images/balibeach.jpg" alt="Bali Beach Resort">
                     </div>
                     <div class="package-content">
                         <span class="package-tag">Bestseller</span>
@@ -606,7 +606,7 @@
                 <!-- Package Card 2 -->
                 <div class="package-card">
                     <div class="package-img">
-                        <img src="pariscity.jpg" alt="Paris City Tour">
+                        <img src="images/pariscity.jpg" alt="Paris City Tour">
                     </div>
                     <div class="package-content">
                         <span class="package-tag">Popular</span>
@@ -640,7 +640,7 @@
                 <!-- Package Card 3 -->
                 <div class="package-card">
                     <div class="package-img">
-                        <img src="maldives1.jpg" alt="Maldives Luxury Resort">
+                        <img src="images/maldives1.jpg" alt="Maldives Luxury Resort">
                     </div>
                     <div class="package-content">
                         <span class="package-tag">Luxury</span>
@@ -674,7 +674,7 @@
                 <!-- Package Card 4 -->
                 <div class="package-card">
                     <div class="package-img">
-                        <img src="egypt.jpg" alt="Egypt Pyramids Tour">
+                        <img src="images/egypt.jpg" alt="Egypt Pyramids Tour">
                     </div>
                     <div class="package-content">
                         <span class="package-tag">Historical</span>
@@ -708,7 +708,7 @@
                 <!-- Package Card 5 -->
                 <div class="package-card">
                     <div class="package-img">
-                        <img src="japancherry.jpg" alt="Japan Cherry Blossom Tour">
+                        <img src="images/japancherry.jpg" alt="Japan Cherry Blossom Tour">
                     </div>
                     <div class="package-content">
                         <span class="package-tag">Seasonal</span>
@@ -742,7 +742,7 @@
                 <!-- Package Card 6 -->
                 <div class="package-card">
                     <div class="package-img">
-                        <img src="thailand.jpg" alt="Thailand Adventure">
+                        <img src="images/thailand.jpg" alt="Thailand Adventure">
                     </div>
                     <div class="package-content">
                         <span class="package-tag">Adventure</span>
@@ -836,168 +836,5 @@
             </div>
         </div>
     </footer>
-    <!-- Firebase SDK -->
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script>
-    <script type="module" src="./js/firebase-config.js"></script>
-    <script type="module" src="./js/firebase-service.js"></script>
-    <script type="module">
-        // Load search parameters from Discover page
-        window.addEventListener('DOMContentLoaded', async function() {
-            const searchParamsStr = localStorage.getItem('searchParams');
-            if (searchParamsStr) {
-                const searchParams = JSON.parse(searchParamsStr);
-                
-                try {
-                    // Filter packages based on destination
-                    const packages = await packageService.searchPackages(searchParams.destination, searchParams.dates);
-                    
-                    // Clear the stored params
-                    localStorage.removeItem('searchParams');
-                    
-                    // Update the packages display
-                    updatePackagesDisplay(packages);
-                } catch (error) {
-                    console.error('Error loading filtered packages:', error);
-                }
-            } else {
-                try {
-                    // Load all packages if no search params
-                    const packages = await packageService.getAllPackages();
-                    updatePackagesDisplay(packages);
-                } catch (error) {
-                    console.error('Error loading all packages:', error);
-                }
-            }
-        });
-    </script>
-    <script type="module">
-        import { packageService } from './js/firebase-service.js';
-
-        // Load packages from Firebase
-        async function loadPackages() {
-            try {
-                const packages = await packageService.getAllPackages();
-                const packagesGrid = document.querySelector('.packages-grid');
-                
-                if (packages.length === 0) {
-                    packagesGrid.innerHTML = '<p class="no-packages">No packages available at the moment.</p>';
-                    return;
-                }
-                
-                packagesGrid.innerHTML = packages.map(pkg => `
-                    <div class="package-card">
-                        <div class="package-img">
-                            <img src="${pkg.imageUrl || '/api/placeholder/400/300'}" alt="${pkg.name}">
-                            ${pkg.discount ? `<div class="discount-badge">Save ${pkg.discount}%</div>` : ''}
-                        </div>
-                        <div class="package-content">
-                            <h3>${pkg.name}</h3>
-                            <p class="duration"><i class="far fa-clock"></i> ${pkg.duration}</p>
-                            <p class="location"><i class="fas fa-map-marker-alt"></i> ${pkg.location}</p>
-                            <ul class="features">
-                                ${pkg.features.map(feature => `<li><i class="fas fa-check"></i> ${feature}</li>`).join('')}
-                            </ul>
-                            <div class="package-footer">
-                                <div class="price">
-                                    ${pkg.originalPrice ? `<span class="original-price">$${pkg.originalPrice}</span>` : ''}
-                                    <span class="current-price">$${pkg.price}</span>
-                                </div>
-                                <a href="book_now.html?type=package&id=${pkg.id}" class="book-btn">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-            } catch (error) {
-                console.error('Error loading packages:', error);
-                const packagesGrid = document.querySelector('.packages-grid');
-                packagesGrid.innerHTML = '<p class="error-message">Error loading packages. Please try again later.</p>';
-            }
-        }
-
-        // Load packages when the page loads
-        loadPackages();
-    </script>
-    <script>
-        // Mobile Menu Toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-        
-        // Dark Mode Toggle
-        const darkModeToggle = document.getElementById('dark-mode-toggle');
-        const body = document.body;
-        
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            body.classList.add('dark-mode');
-            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        }
-        
-        darkModeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            
-            // Update icon
-            if (body.classList.contains('dark-mode')) {
-                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-                localStorage.setItem('theme', 'light');
-            }
-        });
-        
-        // Filter functionality
-        const searchBtn = document.querySelector('.search-btn');
-        searchBtn.addEventListener('click', () => {
-            // Get filter values
-            const destination = document.getElementById('destination').value;
-            const duration = document.getElementById('duration').value;
-            const budget = document.getElementById('budget').value;
-            const travelDate = document.getElementById('travel-date').value;
-            
-            // Here you would normally implement filtering logic
-            // For demo purposes, just log the filter values
-            console.log({
-                destination,
-                duration,
-                budget,
-                travelDate
-            });
-            
-            // You could add animation or loading state here
-            searchBtn.textContent = 'Searching...';
-            setTimeout(() => {
-                searchBtn.textContent = 'Search Packages';
-                alert('Search functionality would filter packages based on your criteria.');
-            }, 1000);
-        });
-        
-        // Newsletter form submission
-        const newsletterForm = document.querySelector('.newsletter-form');
-        newsletterForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = newsletterForm.querySelector('input').value;
-            
-            // Here you would normally handle form submission
-            // For demo purposes, just show a confirmation
-            alert(`Thank you! Your email ${email} has been subscribed to our newsletter.`);
-            newsletterForm.reset();
-        });
-        let btn=document.querySelectorAll(".book-btn");
-
-        btn.forEach(btns => {
-        btns.setAttribute("href", "book_now.html");
-        });
-
-        document.querySelector("#sub").addEventListener("click",()=>{
-            alert("THANK YOU FOR")
-        });
-    </script>
 </body>
 </html>

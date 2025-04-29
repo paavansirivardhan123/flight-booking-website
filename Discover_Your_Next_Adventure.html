@@ -118,7 +118,7 @@
         /* Hero Section */
         .hero {
             height: 100vh;
-            background-image: url('main2.jpg');
+            background-image: url('images/main2.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -696,7 +696,7 @@
                     <span class="logo-text">Voyager</span>
                 </a>
 
-                <div class="nav-icons">
+                <!-- <div class="nav-icons">
                     <button class="login-btn">
                         <i class="fas fa-user"></i>
                         <span>Login</span>
@@ -704,7 +704,7 @@
                     <button class="hamburger" id="mobile-menu-btn">
                         <i class="fas fa-bars"></i>
                     </button>
-                </div>
+                </div> -->
             </div>
         </div>
     </header>
@@ -751,7 +751,7 @@
                 <!-- Destination 1 -->
                 <div class="destination-card">
                     <div class="destination-img">
-                        <img src="paris.jpg" alt="Paris">
+                        <img src="images/paris.jpg" alt="Paris">
                         <div class="destination-price">From $499</div>
                     </div>
                     <div class="destination-content">
@@ -771,7 +771,7 @@
                 <!-- Destination 2 -->
                 <div class="destination-card">
                     <div class="destination-img">
-                        <img src="bali.jpg" alt="Bali">
+                        <img src="images/bali.jpg" alt="Bali">
                         <div class="destination-price">From $699</div>
                     </div>
                     <div class="destination-content">
@@ -791,7 +791,7 @@
                 <!-- Destination 3 -->
                 <div class="destination-card">
                     <div class="destination-img">
-                        <img src="Tokyo1.jpg" alt="Tokyo">
+                        <img src="images/Tokyo1.jpg" alt="Tokyo">
                         <div class="destination-price">From $899</div>
                     </div>
                     <div class="destination-content">
@@ -822,7 +822,7 @@
                 <!-- Deal 1 -->
                 <div class="deal-card">
                     <div class="deal-img">
-                        <img src="Maldives.jpg" alt="Maldives Deal">
+                        <img src="images/Maldives.jpg" alt="Maldives Deal">
                         <div class="deal-discount">-30%</div>
                         <div class="deal-name">
                             <h3>Maldives Beach Resort</h3>
@@ -843,7 +843,7 @@
                 <!-- Deal 2 -->
                 <div class="deal-card">
                     <div class="deal-img">
-                        <img src="NewYork.jpg" alt="New York Deal">
+                        <img src="images/NewYork.jpg" alt="New York Deal">
                         <div class="deal-discount">-25%</div>
                         <div class="deal-name">
                             <h3>New York City Break</h3>
@@ -864,7 +864,7 @@
                 <!-- Deal 3 -->
                 <div class="deal-card">
                     <div class="deal-img">
-                        <img src="Rome.png" alt="Rome Deal">
+                        <img src="images/Rome.png" alt="Rome Deal">
                         <div class="deal-discount">-20%</div>
                         <div class="deal-name">
                             <h3>Rome Historical Tour</h3>
@@ -893,7 +893,7 @@
                 <p>Use our interactive images to find your next adventure</p>
             </div>
             <div class="map-container">
-                <div class="map-placeholder" style="background-image: url('beach1.jpg'); background-repeat: no-repeat; background-size: cover;">
+                <div class="map-placeholder" style="background-image: url('images/beach1.jpg'); background-repeat: no-repeat; background-size: cover;">
                 </div>
                 <div class="map-filters">
                     <button class="filter-btn" id="beach" value="beach">Beaches</button>
@@ -916,7 +916,7 @@
                 <div class="reviews-slider">
                     <!-- Review 1 -->
                     <div class="review-card">
-                        <img src="person1.jpg" alt="Traveler 1" class="review-img">
+                        <img src="images/person1.jpg" alt="Traveler 1" class="review-img">
                         <div class="review-content">
                             <p>"Our trip to Switzerland was like a dream! From snow-covered peaks to cozy chalets, everything was flawlessly organized by Voyager. Highly recommend!"</p>
                         </div>
@@ -931,7 +931,7 @@
                         <div class="review-location">Bali, Indonesia</div>
                     </div>
                     <div class="review-card">
-                        <img src="person2.jpg" alt="Traveler 2" class="review-img">
+                        <img src="images/person2.jpg" alt="Traveler 2" class="review-img">
                         <div class="review-content">
                             <p>"Voyager crafted a perfect solo getaway to Japan for me. The cherry blossoms, the culture, the food—everything was magical. Will book again!"</p>
                          </div>
@@ -945,7 +945,7 @@
                         <div class="review-location">Bali, Indonesia</div>
                     </div>
                     <div class="review-card">
-                        <img src="person3.jpg" alt="Traveler 3" class="review-img">
+                        <img src="images/person3.jpg" alt="Traveler 3" class="review-img">
                         <div class="review-content">
                             <p>"I took my friends on a girls’ trip to Greece, and Voyager took care of every detail! Santorini sunsets were unforgettable. Thank you for the amazing memories!"</p>
                         </div>
@@ -1032,26 +1032,25 @@
             </div>
         </div>
     </footer>
-
     <script>
     document.querySelectorAll("button").forEach(button => {
         button.addEventListener("click", (event) => {
 
             if (event.target.value === "beach") {
                 document.getElementsByClassName("map-placeholder")[0].style.cssText =
-                    "background-image: url('beach1.jpg'); background-repeat: no-repeat; background-size: cover;";
+                    "background-image: url('images/beach1.jpg'); background-repeat: no-repeat; background-size: cover;";
             }
             else if (event.target.value === "hill") {
                 document.getElementsByClassName("map-placeholder")[0].style.cssText =
-                    "background-image: url('mountains.jpg'); background-repeat: no-repeat; background-size: cover;";
+                    "background-image: url('images/mountains.jpg'); background-repeat: no-repeat; background-size: cover;";
             }
             else if (event.target.value === "city") {
                 document.getElementsByClassName("map-placeholder")[0].style.cssText =
-                    "background-image: url('city.jpg'); background-repeat: no-repeat; background-size: cover;";
+                    "background-image: url('images/city.jpg'); background-repeat: no-repeat; background-size: cover;";
             }
             else if (event.target.value === "his") {
                 document.getElementsByClassName("map-placeholder")[0].style.cssText =
-                    "background-image: url('TajMahal.jpg'); background-repeat: no-repeat; background-size: cover;";
+                    "background-image: url('images/TajMahal.jpg'); background-repeat: no-repeat; background-size: cover;";
             }
         });
     });
